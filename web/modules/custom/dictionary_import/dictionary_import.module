@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Dictionary import module.
+ */
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ *
+ * Adds UniqueField constraint to Dictionary Entry field_word field.
+ */
+function dictionary_import_entity_bundle_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type, $bundle) {
+  if ($entity_type->id() === 'node' && $bundle === 'dictionary_entry') {
+    if (isset($fields['field_word'])) {
+      $fields['field_word']->addConstraint('UniqueField', []);
+    }
+  }
+}

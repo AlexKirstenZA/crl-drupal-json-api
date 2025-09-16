@@ -1,0 +1,5 @@
+name: 'Dictionary import'
+type: module
+description: 'Provides a Drush command to import a single word via the Free Dictionary API service.'
+package: Custom
+core_version_requirement: ^10 || ^11

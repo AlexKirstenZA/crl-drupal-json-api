@@ -1,0 +1,19 @@
+uuid: 6c016dcb-8ab3-4437-b8e8-1f7afdc4d7ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_word
+    - node.type.dictionary_entry
+id: node.dictionary_entry.field_word
+field_name: field_word
+entity_type: node
+bundle: dictionary_entry
+label: Word
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

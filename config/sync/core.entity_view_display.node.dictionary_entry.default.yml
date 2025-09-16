@@ -1,0 +1,36 @@
+uuid: 6e58d88a-3b77-4b71-805d-37c81ef7287a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dictionary_entry.field_definitions
+    - field.field.node.dictionary_entry.field_word
+    - node.type.dictionary_entry
+  module:
+    - user
+id: node.dictionary_entry.default
+targetEntityType: node
+bundle: dictionary_entry
+mode: default
+content:
+  field_definitions:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_word:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

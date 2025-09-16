@@ -1,0 +1,19 @@
+uuid: e1e01df6-d779-463c-a468-dda1d8aec942
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_definitions
+    - node.type.dictionary_entry
+id: node.dictionary_entry.field_definitions
+field_name: field_definitions
+entity_type: node
+bundle: dictionary_entry
+label: Definitions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

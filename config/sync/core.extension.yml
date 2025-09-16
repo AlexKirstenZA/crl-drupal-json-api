@@ -3,8 +3,10 @@ _core:
 module:
   block: 0
   dblog: 0
+  dictionary_import: 0
   dynamic_page_cache: 0
   field: 0
+  field_ui: 0
   filter: 0
   mysql: 0
   node: 0
