@@ -18,7 +18,7 @@ composer-install:
 	ddev composer install
 
 drupal-site-install:
-	ddev drush site:install --account-name=admin --account-pass=admin -y
+	ddev drush site:install minimal --existing-config --account-name=admin --account-pass=admin -y
 
 local-settings:
 	cp web/sites/example.settings.local.php web/sites/default/settings.local.php
@@ -26,3 +26,9 @@ local-settings:
 
 login:
 	ddev drush uli
+
+config-export:
+	ddev drush cex
+
+config-import:
+	ddev drush cim -y

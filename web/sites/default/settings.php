@@ -258,7 +258,7 @@ $databases = [];
  * directory in the public files path. The setting below allows you to set
  * its location.
  */
-# $settings['config_sync_directory'] = '/directory/outside/webroot';
+$settings['config_sync_directory'] = DRUPAL_ROOT . '/../config/sync';
 
 /**
  * Settings:
@@ -288,7 +288,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'KFvVmgH86n99T7_wOZCHWiY4bPg4yfRZCDvHSPQgON8HqUZcTgZGjySWQXr6iPN6QxooYjhquA';
 
 /**
  * Deployment identifier.

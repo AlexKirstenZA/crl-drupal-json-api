@@ -7,8 +7,10 @@
 /web/*
 
 # Allow custom modules and themes
-!web/modules
-!web/themes
+web/modules
+web/themes
+!web/modules/custom
+!web/themes/custom
 
 # Allow site settings
 !web/sites
