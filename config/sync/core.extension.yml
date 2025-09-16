@@ -7,11 +7,14 @@ module:
   dynamic_page_cache: 0
   field: 0
   field_ui: 0
+  file: 0
   filter: 0
+  jsonapi: 0
   mysql: 0
   node: 0
   page_cache: 0
   path_alias: 0
+  serialization: 0
   system: 0
   text: 0
   update: 0
