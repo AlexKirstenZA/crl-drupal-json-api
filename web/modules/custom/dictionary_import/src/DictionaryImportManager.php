@@ -23,7 +23,6 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
   public function __construct(
     private readonly ClientInterface $httpClient,
     private readonly EntityTypeManagerInterface $entityTypeManager,
-    private readonly LoggerChannelInterface $logger,
   ) {}
 
   /**
@@ -37,6 +36,32 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
 
     $body = (string) $response->getBody();
     return json_decode($body, TRUE);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function createOrUpdateEntry(array $word): int {
+    $content = $this->buildNodeContentArray($word);
+
+    $existing_nodes = $this->entityTypeManager->getStorage('node')
+      ->loadByProperties(['field_word' => $content['field_word']]);
+
+    if (empty($existing_nodes)) {
+      $entity = $this->entityTypeManager->getStorage('node')
+        ->create($content);
+    }
+    else {
+      $entity = reset($existing_nodes);
+      $entity = $this->updateNodeEntityValues($entity, $content);
+    }
+
+    $violations = $entity->validate();
+    if ($violations->count() > 0) {
+      throw new CommandFailedException('Node validation failed');
+    }
+
+    return $entity->save();
   }
 
   /**
@@ -64,32 +89,6 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
       'field_word' => $title,
       'field_definitions' => $definitions,
     ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function createOrUpdateEntry(array $word): int {
-    $content = $this->buildNodeContentArray($word);
-
-    $existing_nodes = $this->entityTypeManager->getStorage('node')
-      ->loadByProperties(['field_word' => $content['field_word']]);
-
-    if (empty($existing_nodes)) {
-      $entity = $this->entityTypeManager->getStorage('node')
-        ->create($content);
-    }
-    else {
-      $entity = reset($existing_nodes);
-      $entity = $this->updateNodeEntityValues($entity, $content);
-    }
-
-    $violations = $entity->validate();
-    if ($violations->count() > 0) {
-      throw new CommandFailedException('Node validation failed');
-    }
-
-    return $entity->save();
   }
 
   /**
