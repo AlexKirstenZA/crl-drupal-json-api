@@ -9,10 +9,9 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drush\Exceptions\CommandFailedException;
 use GuzzleHttp\ClientInterface;
-use function var_dump;
 
 /**
- * @todo Add class description.
+ * Dictionary Import manager service.
  */
 final class DictionaryImportManager implements DictionaryImportManagerInterface {
 
@@ -28,12 +27,7 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
   ) {}
 
   /**
-   * Requests a word entry from Dictionary REST API.
-   *
-   * @param string $word
-   *
-   * @return array
-   * @throws \GuzzleHttp\Exception\GuzzleException
+   * {@inheritdoc}
    */
   public function requestApiWord(string $word): array {
     $word = trim($word);
@@ -49,8 +43,10 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
    * Builds node content array for entity type manager from API data.
    *
    * @param array $word
+   *   API response word data.
    *
    * @return array
+   *   Mapped node content array.
    */
   private function buildNodeContentArray(array $word): array {
     $title = $word[0]['word'];
@@ -77,11 +73,11 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
     $content = $this->buildNodeContentArray($word);
 
     $existing_nodes = $this->entityTypeManager->getStorage('node')
-                                              ->loadByProperties(['field_word' => $content['field_word']]);
+      ->loadByProperties(['field_word' => $content['field_word']]);
 
     if (empty($existing_nodes)) {
       $entity = $this->entityTypeManager->getStorage('node')
-                                        ->create($content);
+        ->create($content);
     }
     else {
       $entity = reset($existing_nodes);
@@ -96,6 +92,17 @@ final class DictionaryImportManager implements DictionaryImportManagerInterface 
     return $entity->save();
   }
 
+  /**
+   * Maps content array to existing Node entity fields.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   Node entity.
+   * @param array $content
+   *   Content array.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   Node entity.
+   */
   private function updateNodeEntityValues(EntityInterface $entity, array $content): EntityInterface {
     $entity->title = $content['title'];
     $entity->set('field_word', $content['field_word']);
