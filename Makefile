@@ -32,3 +32,12 @@ config-export:
 
 config-import:
 	ddev drush cim -y
+
+coding-standards:
+	ddev exec ./vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml "web/modules/custom"
+
+coding-standards-fix:
+	ddev exec ./vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml "web/modules/custom"
+
+unit-tests:
+	ddev exec ./vendor/bin/phpunit ./web/modules/custom
