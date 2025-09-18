@@ -23,6 +23,27 @@ This will:
 - Create local settings file
 - Generate admin login link
 
+You can then follow the admin link output to the console, to login to Drupal:
+
+```bash
+https://crl-drupal-json-api.ddev.site/user/reset/1/1758188176/Sp6Qeek0cC6EBYOEFuLpO2e80jbGnp6nAWeC7CQPWEs/login
+```
+
+## Useful Commands
+
+### DDEV Management
+```bash
+make start          # Start DDEV
+make stop           # Stop DDEV
+make remove         # Delete DDEV project
+```
+
+### Drupal Commands
+```bash
+ddev drush cr       # Clear cache
+make login          # Generate admin login link
+```
+
 ## Project Structure
 
 - `web/` - Drupal docroot
@@ -55,21 +76,6 @@ Outstanding features that haven't been included:
 - NextJS cache revalidation logic (i.e calling a revalidation endpoint when content is updated)
 - Config split / config ignore per environment
 - Tighten up CORS config (not currently production ready)
-
-## Useful Commands
-
-### DDEV Management
-```bash
-make start          # Start DDEV
-make stop           # Stop DDEV
-make remove         # Delete DDEV project
-```
-
-### Drupal Commands
-```bash
-ddev drush cr       # Clear cache
-make login          # Generate admin login link
-```
 
 ## Troubleshooting
 
