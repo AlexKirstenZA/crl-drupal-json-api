@@ -67,6 +67,12 @@ ddev drush dictionary_entry:import happy
 ddev drush dei happy
 ```
 
+You can now view a JSON:API response containing the new node data, by filtering using the word "happy":
+
+```bash
+https://crl-drupal-json-api.ddev.site/jsonapi/node/dictionary_entry?filter[field_word]=happy
+```
+
 ## TODO:
 
 Outstanding features that haven't been included:
